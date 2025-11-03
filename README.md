@@ -31,46 +31,102 @@ Older tools like **Apache Ant** used a **procedural** or **task-based** approach
 
 -----
 
-## 🏗️ Maven Architecture Diagram & Component Explanation
+# Maven Architecture and Components:
 
-The Maven architecture is centered around the POM, the Build Lifecycle, and its interaction with various repositories.
+```
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                          MAVEN ARCHITECTURE                               ║
+╚═══════════════════════════════════════════════════════════════════════════╝
 
-+-------------------+
-                                        |  CENTRAL / REMOTE |
-                                        |    REPOSITORIES   |
-                                        | (External Artifacts) |
-                                        +----------+--------+
-                                                   |
-                                                   | (3. Downloads)
-                                                   |
-    +-----------------+                  +---------v---------+
-    |  PROJECT OBJECT |                  |      LOCAL        |
-    |  MODEL (POM)    | <------------- (2. Caches/Installs) |
-    |   (pom.xml)     |                  |   REPOSITORY      |
-    +--------+--------+                  | (~/.m2/repository) |
-             |                           +---------^---------+
-             |                                     |
-             | (1. Defines Build/Dependencies)     | (4. Resolves Dependency)
-             |                                     |
-             |                                     |
-    +--------v-------------------------------------v--------+
-    |                                                      |
-    |               MAVEN BUILD LIFECYCLE (mvn command)    |
-    |                                                      |
-    | +---------------------+  +-------------------------+ |
-    | | **LIFECYCLE** |  | **GOALS** (Plugin Tasks) | |
-    | | (e.g., Default)     |  | (e.g., compiler:compile) | |
-    | +----------+----------+  +-------------------------+ |
-    | | **PHASES** |              ^               |
-    | | (validate, compile, |              |               |
-    | | test, package,      |              | (5. Executes Goals) |
-    | | install, deploy)    |              |               |
-    | +----------+----------+  +-------------------------+ |
-    |                                                      |
-    |                **PLUGINS** (The Workers)             |
-    +------------------------------------------------------+
+                    ┌─────────────────────────────────┐
+                    │   CENTRAL/REMOTE REPOSITORIES   │
+                    │   (Maven Central, Nexus, etc.)  │
+                    │      External Artifacts         │
+                    └────────────────┬────────────────┘
+                                     │
+                                     │ (3) Download
+                                     │     Artifacts
+                                     ↓
+    ┌──────────────────┐      ┌─────────────────────┐
+    │  PROJECT OBJECT  │      │  LOCAL REPOSITORY   │
+    │   MODEL (POM)    │←────→│  ~/.m2/repository   │
+    │    pom.xml       │ (2)  │   Cached Artifacts  │
+    └────────┬─────────┘Cache │    & Dependencies   │
+             │         Install└──────────┬──────────┘
+             │                           │
+             │ (1) Defines:              │ (4) Resolves
+             │  • Build Config           │     Dependencies
+             │  • Dependencies           │
+             │  • Plugins                │
+             │  • Goals                  │
+             ↓                           ↓
+    ╔════════════════════════════════════════════════════════╗
+    ║         MAVEN BUILD LIFECYCLE (mvn command)            ║
+    ╠════════════════════════════════════════════════════════╣
+    ║                                                        ║
+    ║  ┌──────────────────────────────────────────────┐    ║
+    ║  │         DEFAULT LIFECYCLE PHASES             │    ║
+    ║  ├──────────────────────────────────────────────┤    ║
+    ║  │  validate  →  Validate project structure     │    ║
+    ║  │  compile   →  Compile source code            │    ║
+    ║  │  test      →  Run unit tests                 │    ║
+    ║  │  package   →  Create JAR/WAR                 │    ║
+    ║  │  verify    →  Run integration tests          │    ║
+    ║  │  install   →  Install to local repo          │    ║
+    ║  │  deploy    →  Deploy to remote repo          │    ║
+    ║  └──────────────────┬───────────────────────────┘    ║
+    ║                     │                                 ║
+    ║                     │ (5) Each Phase                  ║
+    ║                     │     Executes                    ║
+    ║                     ↓                                 ║
+    ║  ┌──────────────────────────────────────────────┐    ║
+    ║  │              PLUGINS (Workers)               │    ║
+    ║  ├──────────────────────────────────────────────┤    ║
+    ║  │  maven-compiler-plugin   → compile:compile   │    ║
+    ║  │  maven-surefire-plugin   → test:test         │    ║
+    ║  │  maven-jar-plugin        → jar:jar           │    ║
+    ║  │  maven-install-plugin    → install:install   │    ║
+    ║  │  maven-deploy-plugin     → deploy:deploy     │    ║
+    ║  └──────────────────────────────────────────────┘    ║
+    ║                                                        ║
+    ║  ┌──────────────────────────────────────────────┐    ║
+    ║  │         PLUGIN GOALS (Specific Tasks)        │    ║
+    ║  │  plugin:goal  →  Executes specific operation │    ║
+    ║  └──────────────────────────────────────────────┘    ║
+    ║                                                        ║
+    ╚════════════════════════════════════════════════════════╝
+                             │
+                             │ (6) Produces
+                             ↓
+                    ┌─────────────────┐
+                    │  BUILD OUTPUT   │
+                    │  target/        │
+                    │  • Classes      │
+                    │  • JARs/WARs    │
+                    │  • Reports      │
+                    └─────────────────┘
 
-### 
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                           FLOW EXPLANATION                                ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║  1. POM defines project configuration, dependencies, and plugins          ║
+║  2. Maven caches/installs artifacts in local repository                   ║
+║  3. Maven downloads missing dependencies from remote repositories         ║
+║  4. Maven resolves all dependencies from local/remote repositories        ║
+║  5. Build lifecycle phases execute bound plugin goals                     ║
+║  6. Plugins perform actual build work (compile, test, package, etc.)      ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+```
+
+This ASCII diagram shows:
+- **Repository hierarchy** (Remote → Local)
+- **POM as the central configuration**
+- **Build lifecycle with phases**
+- **Plugins that do the actual work**
+- **Clear flow of operations** (numbered steps)
+- **Output generation**
+
+The architecture emphasizes Maven's convention-over-configuration approach and how components interact during the build process.
 
 1.  **Project Object Model (POM):** The core of the project. It defines the project's coordinates, dependencies, build settings, plugins, and more.
 2.  **Build Lifecycles, Phases, and Goals:**
