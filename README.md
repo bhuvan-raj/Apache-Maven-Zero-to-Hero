@@ -157,22 +157,13 @@ The architecture emphasizes Maven's convention-over-configuration approach and h
     <!-- ========== PROJECT COORDINATES (GAV) ========== -->
     <groupId>com.example.myapp</groupId>
     <artifactId>user-management-system</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
     
     <!-- ========== PROJECT METADATA ========== -->
     <name>User Management System</name>
     <description>A simple user management application with REST API</description>
     <url>https://github.com/example/user-management</url>
-    
-    <!-- ========== PROPERTIES ========== -->
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <junit.version>5.9.3</junit.version>
-        <spring.version>6.0.11</spring.version>
-    </properties>
     
     <!-- ========== DEPENDENCIES ========== -->
     <dependencies>
@@ -286,31 +277,14 @@ These three elements uniquely identify your project in the Maven universe:
 - Should be lowercase with hyphens
 - Becomes part of the JAR filename
 
-**`<version>`**: `1.0-SNAPSHOT`
+**`<version>`**: `1.0`
 - Your project's version number
-- `SNAPSHOT` means it's a development version (not released)
-- Maven treats SNAPSHOTs differently (always checks for updates)
-
+  
 **`<packaging>`**: `jar`
 - Output format: `jar` (Java Archive), `war` (Web Archive), `pom` (parent project)
 - Default is `jar` if omitted
 
-### 4. **Properties Section**
-```xml
-<properties>
-    <maven.compiler.source>17</maven.compiler.source>
-    <junit.version>5.9.3</junit.version>
-</properties>
-```
-- Define variables that can be reused throughout the POM
-- Referenced using `${property.name}` syntax
-- Centralizes version management (change once, applies everywhere)
-- Common properties:
-  - Java version settings
-  - Character encoding
-  - Dependency versions
-
-### 5. **Dependencies Section**
+### 4. **Dependencies Section**
 ```xml
 <dependencies>
     <dependency>
@@ -329,7 +303,7 @@ These three elements uniquely identify your project in the Maven universe:
   - `runtime`: Not needed for compilation, but required at runtime
 - Maven automatically downloads dependencies from repositories
 
-### 6. **Build Section**
+### 5. **Build Section**
 ```xml
 <build>
     <finalName>user-management</finalName>
