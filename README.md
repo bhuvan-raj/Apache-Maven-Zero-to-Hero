@@ -77,14 +77,14 @@ Maven commands are executed using the `mvn` executable, typically followed by a 
 
 | Command | Lifecycle Phase / Goal | Description |
 | :--- | :--- | :--- |
-| `mvn **clean**` | Clean Lifecycle | Deletes the `target` directory, removing all previously compiled and built artifacts. |
-| `mvn **compile**` | Default Lifecycle Phase | Compiles the project's main source code (`src/main/java`) and places the class files in `target/classes`. |
-| `mvn **test**` | Default Lifecycle Phase | Executes the unit tests (`src/test/java`). Precedes this by running `compile`. |
-| `mvn **package**` | Default Lifecycle Phase | Takes the compiled code and packages it into its distributable format (e.g., a `.jar` or `.war` file) in the `target` directory. |
-| `mvn **install**` | Default Lifecycle Phase | Runs all phases up to `package`, then installs the packaged artifact into the **local repository** for use by other local projects. |
-| `mvn **deploy**` | Default Lifecycle Phase | Installs the artifact to the local repository and then copies the final artifact to the **remote repository**. |
-| `mvn **archetype:generate**` | Plugin Goal | Creates a new project structure based on a template (archetype). |
-| `mvn **clean install**` | Combined Command | Cleans the project first, then builds, tests, packages, and installs the artifact locally. This is a common command for a full local build. |
+| `mvn clean` | Clean Lifecycle | Deletes the `target` directory, removing all previously compiled and built artifacts. |
+| `mvn compile` | Default Lifecycle Phase | Compiles the project's main source code (`src/main/java`) and places the class files in `target/classes`. |
+| `mvn test` | Default Lifecycle Phase | Executes the unit tests (`src/test/java`). Precedes this by running `compile`. |
+| `mvn package` | Default Lifecycle Phase | Takes the compiled code and packages it into its distributable format (e.g., a `.jar` or `.war` file) in the `target` directory. |
+| `mvn install` | Default Lifecycle Phase | Runs all phases up to `package`, then installs the packaged artifact into the **local repository** for use by other local projects. |
+| `mvn deploy` | Default Lifecycle Phase | Installs the artifact to the local repository and then copies the final artifact to the **remote repository**. |
+| `mvn archetype:generate` | Plugin Goal | Creates a new project structure based on a template (archetype). |
+| `mvn clean install` | Combined Command | Cleans the project first, then builds, tests, packages, and installs the artifact locally. This is a common command for a full local build. |
 
 -----
 
