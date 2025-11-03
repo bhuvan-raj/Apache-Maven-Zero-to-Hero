@@ -35,6 +35,41 @@ Older tools like **Apache Ant** used a **procedural** or **task-based** approach
 
 The Maven architecture is centered around the POM, the Build Lifecycle, and its interaction with various repositories.
 
++-------------------+
+                                        |  CENTRAL / REMOTE |
+                                        |    REPOSITORIES   |
+                                        | (External Artifacts) |
+                                        +----------+--------+
+                                                   |
+                                                   | (3. Downloads)
+                                                   |
+    +-----------------+                  +---------v---------+
+    |  PROJECT OBJECT |                  |      LOCAL        |
+    |  MODEL (POM)    | <------------- (2. Caches/Installs) |
+    |   (pom.xml)     |                  |   REPOSITORY      |
+    +--------+--------+                  | (~/.m2/repository) |
+             |                           +---------^---------+
+             |                                     |
+             | (1. Defines Build/Dependencies)     | (4. Resolves Dependency)
+             |                                     |
+             |                                     |
+    +--------v-------------------------------------v--------+
+    |                                                      |
+    |               MAVEN BUILD LIFECYCLE (mvn command)    |
+    |                                                      |
+    | +---------------------+  +-------------------------+ |
+    | | **LIFECYCLE** |  | **GOALS** (Plugin Tasks) | |
+    | | (e.g., Default)     |  | (e.g., compiler:compile) | |
+    | +----------+----------+  +-------------------------+ |
+    | | **PHASES** |              ^               |
+    | | (validate, compile, |              |               |
+    | | test, package,      |              | (5. Executes Goals) |
+    | | install, deploy)    |              |               |
+    | +----------+----------+  +-------------------------+ |
+    |                                                      |
+    |                **PLUGINS** (The Workers)             |
+    +------------------------------------------------------+
+
 ### 
 
 1.  **Project Object Model (POM):** The core of the project. It defines the project's coordinates, dependencies, build settings, plugins, and more.
