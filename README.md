@@ -73,7 +73,7 @@ Each folder contains its own `README.md` with detailed explanations, diagrams, a
 
 ## 🔗 Used In
 
-This repository is a prerequisite for the **[Jenkins Zero to Hero](https://github.com/your-username/Jenkins-Zero-to-Hero)** course. Maven knowledge is required before the Jenkins Maven build and deploy modules.
+This repository is a prerequisite for the **[Jenkins Zero to Hero](https://github.com/bhuvan-raj/Jenkins-Zero-to-Hero)** course. Maven knowledge is required before the Jenkins Maven build and deploy modules.
 
 ---
 
