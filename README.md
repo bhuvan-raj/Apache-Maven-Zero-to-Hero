@@ -36,11 +36,11 @@ By the end of this course, you will be able to:
 
 | # | Topic | Description |
 |---|-------|-------------|
-| 01 | [What is Apache Maven?](./what-is-maven/) | Introduction, core concepts, and how Maven compares to older tools like Ant |
-| 02 | [Maven Architecture](./maven-architecture/) | Deep dive into POM, build lifecycle, phases, goals, plugins, and repositories |
-| 03 | [The pom.xml File](./pom-xml/) | Anatomy of a `pom.xml` — GAV coordinates, dependencies, scopes, and plugins |
-| 04 | [Maven Commands](./maven-commands/) | Every essential Maven command explained with a visual flow diagram |
-| 05 | [Maven Installation](./maven-installation/) | Step-by-step installation guide for Linux (Fedora/Ubuntu), Windows, and macOS |
+| 01 | [What is Apache Maven?](./Introduction-to-Apache-Maven/) | Introduction, core concepts, and how Maven compares to older tools like Ant |
+| 02 | [Maven Architecture](./Maven-Architecture/) | Deep dive into POM, build lifecycle, phases, goals, plugins, and repositories |
+| 03 | [The pom.xml File](./pom.xml/) | Anatomy of a `pom.xml` — GAV coordinates, dependencies, scopes, and plugins |
+| 04 | [Maven Commands](./Maven-Commands/) | Every essential Maven command explained with a visual flow diagram |
+| 05 | [Maven Installation](./Maven-Installation/) | Step-by-step installation guide for Linux (Fedora/Ubuntu), Windows, and macOS |
 
 ---
 
