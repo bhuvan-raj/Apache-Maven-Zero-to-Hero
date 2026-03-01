@@ -1,4 +1,3 @@
-<img src="https://github.com/bhuvan-raj/Apache-Maven-Zero-to-Hero/blob/main/assets/maven.png" alt="Banner" />
 
 <div align="center">
 
